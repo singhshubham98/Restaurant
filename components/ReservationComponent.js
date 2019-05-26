@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import DatePicker from "react-native-datepicker";
 import * as Animatable from "react-native-animatable";
+import { Permissions, Notifications } from "expo";
 
 class Reservation extends Component {
   constructor(props) {
@@ -41,6 +42,39 @@ class Reservation extends Component {
     });
   };
 
+  async obtainNotificationPermission() {
+    let permission = await Permissions.getAsync(
+      Permissions.USER_FACING_NOTIFICATIONS
+    );
+
+    if (permission.status !== "granted") {
+      permission = await Permissions.askAsync(
+        Permissions.USER_FACING_NOTIFICATIONS
+      );
+      if (permission.status !== "granted") {
+        Alert.alert("'Permission not granted to show notifications");
+      }
+    }
+    return permission;
+  }
+
+  async presentLocalNotification(date) {
+    await this.obtainNotificationPermission();
+
+    Notifications.presentLocalNotificationAsync({
+      title: "Your Reservation",
+      body: "Reservation for '+ date + ' requested",
+      ios: {
+        sound: true
+      },
+      android: {
+        sound: true,
+        vibrate: true,
+        color: "#512DA8"
+      }
+    });
+  }
+
   handleReservation = () => {
     Alert.alert(
       "Your Reservation ok?",
@@ -60,6 +94,7 @@ class Reservation extends Component {
           text: "OK",
           style: "default",
           onPress: () => {
+            this.presentLocalNotification(this.state.date);
             this.toggleModal();
             this.resetForm();
           }

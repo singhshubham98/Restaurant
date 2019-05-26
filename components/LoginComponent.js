@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { View, Button, StyleSheet } from "react-native";
-import { Card, Icon, Input, Checkbox } from "react-native-elements";
+import { Card, Icon, Input, CheckBox } from "react-native-elements";
 import { SecureStore } from "expo";
 
 class Login extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       username: "",
       password: "",
@@ -63,7 +64,7 @@ class Login extends Component {
           value={this.state.password}
           containerStyle={styles.formInput}
         />
-        <Checkbox
+        <CheckBox
           title="Remember me"
           center
           checked={this.state.remember}
@@ -92,14 +93,14 @@ const styles = StyleSheet.create({
     margin: 20
   },
   formInput: {
-    margin: 40
+    margin: 10
   },
   formCheckbox: {
     margin: 40,
     backgroundColor: null
   },
   formButton: {
-    margin: 60
+    margin: 40
   }
 });
 
