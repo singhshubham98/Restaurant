@@ -11,7 +11,6 @@ import {
   PanResponder
 } from "react-native";
 import { Card, Icon, Rating, Input } from "react-native-elements";
-// import Moment from "moment";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import { postComment, postFavorite } from "../redux/actionCreators";
@@ -277,10 +276,7 @@ class DishDetail extends Component {
             </View>
             <View style={{ margin: 10 }}>
               <Button
-                onPress={() => {
-                  this.toggleModal();
-                  // this.resetForm();
-                }}
+                onPress={() => this.toggleModal()}
                 color="grey"
                 title="Cancel"
               />
