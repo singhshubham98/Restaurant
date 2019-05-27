@@ -52,7 +52,14 @@ class Contact extends Component {
           <Button
             title="Send Email"
             buttonStyle={{ backgroundColor: "#512DA8" }}
-            icon={<Icon type="font-awesome" name="envelope-o" color="white" />}
+            icon={
+              <Icon
+                type="font-awesome"
+                name="envelope-o"
+                color="white"
+                iconStyle={{ marginLeft: 5 }}
+              />
+            }
             onPress={this.sendMail}
           />
         </Card>
