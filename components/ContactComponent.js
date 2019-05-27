@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Text } from "react-native";
-import { Card } from "react-native-elements";
+import { Card, Button, Icon } from "react-native-elements";
 import * as Animatable from "react-native-animatable";
+import { MailComposer } from "expo";
 
 function RenderAddressLines({ addressLines }) {
   const renderAddressLine = (line, index) => {
@@ -31,6 +32,13 @@ class Contact extends Component {
       ]
     };
   }
+  sendMail() {
+    MailComposer.composeAsync({
+      recipients: ["shubhamsingh4204@gmail.com"],
+      subject: "Enquiry",
+      body: "To whom it may concern:"
+    });
+  }
 
   static navigationOptions = {
     title: "Contact"
@@ -41,6 +49,12 @@ class Contact extends Component {
       <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
         <Card title="Contact Information">
           <RenderAddressLines addressLines={this.state.addressLines} />
+          <Button
+            title="Send Email"
+            buttonStyle={{ backgroundColor: "#512DA8" }}
+            icon={<Icon type="font-awesome" name="envelope-o" color="white" />}
+            onPress={this.sendMail}
+          />
         </Card>
       </Animatable.View>
     );

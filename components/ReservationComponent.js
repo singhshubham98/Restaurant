@@ -63,7 +63,7 @@ class Reservation extends Component {
 
     Notifications.presentLocalNotificationAsync({
       title: "Your Reservation",
-      body: "Reservation for '+ date + ' requested",
+      body: "Reservation for" + date + " requested",
       ios: {
         sound: true
       },
