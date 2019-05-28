@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     margin: 20
   },
   imageButton: {
-    justifyContent: "space-between"
+    justifyContent: "space-around"
   },
   image: {
     margin: 10,
