@@ -12,7 +12,9 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  Text
+  Text,
+  NetInfo,
+  ToastAndroid
 } from "react-native";
 import {
   createStackNavigator,
@@ -351,8 +353,51 @@ class Main extends Component {
     this.props.fetchComments();
     this.props.fetchPromos();
     this.props.fetchLeaders();
+
+    NetInfo.getConnectionInfo().then(connectInfo => {
+      ToastAndroid.show(
+        "Initial Network connectivity Type: " +
+          connectInfo.type +
+          ", effective type : " +
+          connectInfo.effectiveType,
+        ToastAndroid.LONG
+      );
+    });
+
+    NetInfo.addEventListener("connectionChange", this.handleConnectivityChange);
   }
 
+  componentWillUnmount() {
+    NetInfo.removeEventListener(
+      "connectionChange",
+      this.handleConnectivityChange
+    );
+  }
+
+  handleConnectivityChange = connectInfo => {
+    switch (connectInfo.type) {
+      case "none":
+        ToastAndroid.show("You are now offline!", ToastAndroid.LONG);
+        break;
+      case "wifi":
+        ToastAndroid.show("You are now connected with wifi", ToastAndroid.LONG);
+        break;
+      case "cellular":
+        ToastAndroid.show(
+          "You are now connected to Cellular!",
+          ToastAndroid.LONG
+        );
+        break;
+      case "unknown":
+        ToastAndroid.show(
+          "You now have unknown connection!",
+          ToastAndroid.LONG
+        );
+        break;
+      default:
+        break;
+    }
+  };
   render() {
     return (
       <View
