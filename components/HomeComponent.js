@@ -60,7 +60,7 @@ class Home extends Component {
     this.AnimatedValue.setValue(0);
     Animated.timing(this.AnimatedValue, {
       toValue: 8,
-      duration: 8000,
+      duration: 6000,
       easing: Easing.linear
     }).start(() => this.animate());
   }
@@ -104,7 +104,7 @@ class Home extends Component {
           />
         </Animated.View>
         <Animated.View
-          style={{ width: "100%", transform: [{ translateX: xpos2 }] }}
+          style={{ width: "100%", transform: [{ translateX: xpos3 }] }}
         >
           <RenderItem
             item={
